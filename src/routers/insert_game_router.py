@@ -18,10 +18,10 @@ def get_data_file():
     
     # Для Amvera (папка /data существует и доступна для записи)
     if os.path.exists("/data"):
-        return "/data/data.json"
+        return "/data/data/data.json"
     
     # Для локальной разработки
-    local_path = Path(__file__).parent.parent / "data" / "data.json"
+    local_path = Path(__file__).parent.parent.parent / "data" / "data" / "data.json"
     # Создаём папку data, если её нет
     local_path.parent.mkdir(exist_ok=True)
     return str(local_path)
