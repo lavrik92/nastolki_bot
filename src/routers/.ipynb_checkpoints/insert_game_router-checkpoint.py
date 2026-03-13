@@ -9,6 +9,25 @@ import json
 from keyboards.keyboards import GameKeyboards
 from states.fsm_states import InsertGame
 from services.game_sevice import GameService, games_catalog
+import os
+from pathlib import Path
+
+# Определяем где хранить данные
+def get_data_file():
+    """Возвращает правильный путь для data.json"""
+    
+    # Для Amvera (папка /data существует и доступна для записи)
+    if os.path.exists("/data"):
+        return "/data/data.json"
+    
+    # Для локальной разработки
+    local_path = Path(__file__).parent.parent / "data" / "data.json"
+    # Создаём папку data, если её нет
+    local_path.parent.mkdir(exist_ok=True)
+    return str(local_path)
+
+# Используй эту переменную везде в коде
+DATA_FILE = get_data_file()
 
 insert_game_router = Router()
 new_game = dict()
@@ -133,7 +152,7 @@ async def get_description(message: Message, state: FSMContext):
         games_catalog.append(new_game.copy())
         await message.answer(f"Добавлена игра {new_game['name']}\n")
 
-    with open('data/data.json', 'w') as file:
+    with open(DATA_FILE, 'w') as file:
         json.dump(games_catalog, file)
     
     await state.clear()
