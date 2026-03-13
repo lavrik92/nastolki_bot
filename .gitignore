@@ -1,7 +1,6 @@
 # Файлы с секретами
 .env
 .env.local
-.env.*
 
 # Python
 __pycache__/
