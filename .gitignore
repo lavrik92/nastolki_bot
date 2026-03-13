@@ -1,0 +1,13 @@
+# Файлы с секретами
+.env
+.env.local
+.env.*
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+env/
+.python-version
