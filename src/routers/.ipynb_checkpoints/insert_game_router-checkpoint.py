@@ -152,7 +152,7 @@ async def get_description(message: Message, state: FSMContext):
         games_catalog.append(new_game.copy())
         await message.answer(f"Добавлена игра {new_game['name']}\n")
 
-    with open(Path("data/data/data.json").resolve(), 'w') as file:
+    with open(Path("data/data.json").resolve(), 'w') as file:
         json.dump(games_catalog, file)
     
     await state.clear()
