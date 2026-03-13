@@ -21,8 +21,13 @@ def get_data_file():
 # Используй эту переменную везде в коде
 DATA_FILE = get_data_file()
 
-with open(DATA_FILE, 'r') as file:
-    games_catalog = json.load(file)
+if os.path.exists("/data"):
+    try:
+        with open("/data/data.json", 'r') as file:
+            games_catalog = json.load(file)
+    except:
+        with open("data/data.json", 'r') as file:
+            games_catalog = json.load(file)
 
 # --- База данных в памяти ---
 global game_collection
